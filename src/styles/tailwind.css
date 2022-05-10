@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-roboto;
+  }
+  h1 {
+    @apply font-black font-roboto;
+  }
+}
+
+@layer components {
+  .label {
+    @apply inline-block mb-1 text-sm;
+  }
+  .form-control {
+    @apply w-full px-3 py-2 rounded-md shadow-sm outline-none ring-1 ring-gray-300 focus:ring-2 focus:ring-indigo-700 placeholder:text-gray-500;
+  }
+  .form-error {
+    @apply ring-red-500 focus:ring-red-500;
+  }
+  .error-msg {
+    @apply mt-1 text-xs text-red-500;
+  }
+  .link {
+    @apply flex items-center py-4 text-sm font-medium text-gray-700 border-l-4 cursor-pointer hover:bg-indigo-50 px-7 gap-x-4;
+  }
+}
