@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { toast } from "react-toastify";
@@ -8,17 +8,43 @@ import FormikController from "../../components/global/FormikController";
 import Layout from "../../components/global/Layout";
 import Container from "../../components/ui/Container";
 import { productSchema } from "../../validations/products";
-import { insertDocument } from "../../utils/request";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import Spinner from "../../components/ui/Spinner";
 
-const NewProductPage = () => {
+const EditProductPage = () => {
+  const [product, setProduct] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
 
-  const newProduct = async (data) => {
-    setIsSubmitting(true);
-    await insertDocument("products", data);
-    setIsSubmitting(false);
-  };
+  useEffect(() => {
+    setIsLoading((prev) => !prev);
+    const getCurrentProduct = async () => {
+      const id = params?.id;
+      const productsRef = doc(db, "products", id);
+      try {
+        const docSnap = await getDoc(productsRef);
+
+        if (docSnap.exists()) {
+          const data = { id: docSnap.id, ...docSnap.data() };
+          setProduct(data);
+          setIsLoading((prev) => !prev);
+          return data;
+        }
+        return null;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getCurrentProduct();
+  }, []);
+
+  if (isLoading) {
+    return <Spinner loading={isLoading} />;
+  }
 
   return (
     <Layout>
@@ -43,20 +69,32 @@ const NewProductPage = () => {
         </div>
         <Formik
           initialValues={{
-            name: "",
-            brand: "",
-            release_date: "",
-            category: "Men",
-            sizes: [],
-            colors: [],
-            price: "",
-            stocks: 0,
+            name: product.name ?? "",
+            brand: product?.brand ?? "",
+            release_date: product?.release_date ?? "",
+            category: product?.category ?? "",
+            sizes: product?.sizes ?? [],
+            colors: product?.colors ?? [],
+            price: product?.price ?? "",
+            stocks: product?.stocks ?? 0,
           }}
           validationSchema={productSchema}
           onSubmit={async (values) => {
-            await newProduct(values);
-            toast.success("Added successfully!");
-            navigate("/products");
+            const productsRef = doc(db, "products", params.id);
+            try {
+              setIsSubmitting((prev) => !prev);
+              const updateProduct = await setDoc(productsRef, {
+                ...values,
+                last_updated: serverTimestamp(),
+              });
+
+              setIsSubmitting((prev) => !prev);
+              toast.success("Updated successfully!");
+              navigate("/products");
+              return updateProduct;
+            } catch (error) {
+              toast.error(error.message);
+            }
           }}
         >
           {({ values, handleSubmit, errors, touched }) => (
@@ -227,4 +265,4 @@ const NewProductPage = () => {
   );
 };
 
-export default NewProductPage;
+export default EditProductPage;

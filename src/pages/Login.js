@@ -8,8 +8,9 @@ import Navbar from "../components/ui/Navbar";
 
 const LoginPage = () => {
   const [error, setError] = useState("");
-  const { loginUser } = useUserAuth();
+  const { loginUser, user } = useUserAuth();
   const navigate = useNavigate();
+
   return (
     <>
       <Navbar login={true} />
@@ -25,7 +26,7 @@ const LoginPage = () => {
             const { email, password } = values;
             try {
               await loginUser(email, password);
-              navigate("/admin/dashboard");
+              navigate("/dashboard");
             } catch (error) {
               console.error(error.message);
               setError("Email or password is incorrect");

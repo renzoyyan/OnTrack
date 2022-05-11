@@ -4,13 +4,17 @@ import {
   collection,
   deleteDoc,
   getDocs,
+  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 // Add a new document in collection "cities"
 export const insertDocument = async (colName, data) => {
   try {
-    const res = await addDoc(collection(db, colName), data);
+    const res = await addDoc(collection(db, colName), {
+      ...data,
+      createdAt: serverTimestamp(),
+    });
 
     if (!res) return;
 

@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#241363",
+        primary: "#4f46e5",
       },
       fontFamily: {
         roboto: "'Roboto', sans-serif",

@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex">
+    <div className="grid grid-cols-6">
       <Sidebar />
       <MainContent>
         <header className="flex items-center space-x-4 justify-end px-8 text-sm font-medium bg-white border-b border-gray-100">

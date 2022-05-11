@@ -1,15 +1,17 @@
 import React from "react";
 import { Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import FormikController from "../components/global/FormikController";
 import { signupSchema } from "../validations/login";
 import Navbar from "../components/ui/Navbar";
 import { useUserAuth } from "../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth, db } from "../config/firebase";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const RegisterPage = () => {
   const { register } = useUserAuth();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -34,8 +36,13 @@ const RegisterPage = () => {
 
               await setDoc(doc(db, "users", res.user.uid), {
                 ...values,
-                timeStamp: Timestamp.now().toDate().toLocaleDateString(),
+                timeStamp: serverTimestamp(),
               }).catch((err) => console.error(err.message));
+
+              if (res) {
+                navigate("/dashboard");
+                return res;
+              }
             } catch (error) {
               console.error(error.message);
             }

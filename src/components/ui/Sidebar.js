@@ -6,6 +6,7 @@ import {
   TagIcon,
 } from "@heroicons/react/solid";
 import ActiveLink from "./ActiveLink";
+import { Link } from "react-router-dom";
 
 const menus = [
   {
@@ -33,14 +34,15 @@ const menus = [
 const Sidebar = () => {
   return (
     <div
-      className={`w-64 bg-white shadow-md h-screen pt-4 relative duration-300`}
+      className={`col-span-1 w-64 bg-white shadow-md h-screen pt-4 duration-300`}
     >
-      <div className={`block items-center justify-between px-8 gap-x-4`}>
-        <h1
+      <div className={`block px-8 gap-x-4`}>
+        <Link
+          to={"/dashboard"}
           className={`text-indigo-600 text-2xl origin-left font-black duration-200`}
         >
           OnTrack.
-        </h1>
+        </Link>
       </div>
       <div className="pt-8">
         {menus.map((menu, idx) => (

@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../components/global/Layout";
 import ProductsCard from "../../components/products/ProductsCard";
 import ProductsTable from "../../components/products/ProductsTable";
 import Container from "../../components/ui/Container";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useUserAuth } from "../../context/AuthContext";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useUserAuth();
+  const navigate = useNavigate();
 
-  console.log(user);
   useEffect(() => {
     setIsLoading(true);
     const getProducts = async () => {
@@ -26,6 +25,23 @@ const ProductsPage = () => {
 
     getProducts();
   }, []);
+
+  const getCurrentProduct = async (id) => {
+    const productsRef = doc(db, "products", id);
+    try {
+      const docSnap = await getDoc(productsRef);
+
+      if (docSnap.exists()) {
+        const data = { id: docSnap.id, ...docSnap.data() };
+        navigate(`/products/edit/${id}`);
+        return data;
+      }
+      return null;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Layout>
       <Container>
@@ -42,6 +58,7 @@ const ProductsPage = () => {
           {products?.map((prod) => (
             <ProductsCard
               key={prod.id}
+              id={prod.id}
               name={prod.name}
               brand={prod.brand}
               category={prod.category}
@@ -49,6 +66,8 @@ const ProductsPage = () => {
               colors={prod.colors}
               price={prod.price}
               stocks={prod.stocks}
+              release_date={prod.release_date}
+              editProduct={() => getCurrentProduct(prod.id)}
             />
           ))}
         </ProductsTable>
