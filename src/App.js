@@ -32,16 +32,60 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/signup" element={<RegisterPage />} />
-          <Route exact path="/dashboard" element={<DashboardPage />} />
-          <Route exact path="/users" element={<UsersPage />} />
-          <Route exact path="/products" element={<ProductsPage />} />
-          <Route exact path="/products/new" element={<NewProductPage />} />
+          <Route
+            exact
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <UsersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <ProductsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/products/new"
+            element={
+              <ProtectedRoute>
+                <NewProductPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             exact
             path="/products/edit/:id"
-            element={<EditProductPage />}
+            element={
+              <ProtectedRoute>
+                <EditProductPage />
+              </ProtectedRoute>
+            }
           />
-          <Route exact path="/brands" element={<BrandsPage />} />
+          <Route
+            exact
+            path="/brands"
+            element={
+              <ProtectedRoute>
+                <BrandsPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </>

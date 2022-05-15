@@ -8,7 +8,7 @@ import Navbar from "../components/ui/Navbar";
 
 const LoginPage = () => {
   const [error, setError] = useState("");
-  const { loginUser, user } = useUserAuth();
+  const { loginUser } = useUserAuth();
   const navigate = useNavigate();
 
   return (

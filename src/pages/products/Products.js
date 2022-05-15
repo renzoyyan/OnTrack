@@ -4,9 +4,8 @@ import Layout from "../../components/global/Layout";
 import ProductsCard from "../../components/products/ProductsCard";
 import ProductsTable from "../../components/products/ProductsTable";
 import Container from "../../components/ui/Container";
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { useUserAuth } from "../../context/AuthContext";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -54,6 +53,7 @@ const ProductsPage = () => {
             + Add Product
           </Link>
         </div>
+
         <ProductsTable>
           {products?.map((prod) => (
             <ProductsCard

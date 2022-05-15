@@ -3,8 +3,11 @@ import { CollectionIcon, TagIcon, UsersIcon } from "@heroicons/react/outline";
 import Layout from "../components/global/Layout";
 import Container from "../components/ui/Container";
 import SummaryInfo from "../components/ui/SummaryInfo";
+import useUsers from "../utils/users";
 
 const DashboardPage = () => {
+  const { users, isLoading } = useUsers();
+
   return (
     <Layout>
       <Container>
@@ -12,7 +15,7 @@ const DashboardPage = () => {
           <SummaryInfo
             Icon={<UsersIcon className="w-6 h-6 text-gray-100" />}
             title={"Users"}
-            total={"10"}
+            total={isLoading ? "..." : users?.length}
           />
           <SummaryInfo
             Icon={<CollectionIcon className="w-6 h-6 text-gray-100" />}

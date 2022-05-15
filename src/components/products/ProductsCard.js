@@ -1,5 +1,6 @@
 import React from "react";
 import { deleteDocument } from "../../utils/request";
+import AskModal from "../ui/Modal";
 
 const ProductsCard = ({
   id,
@@ -35,12 +36,13 @@ const ProductsCard = ({
           >
             Edit
           </span>
-          <span
+          {/* <span
             className="cursor-pointer text-sm text-red-500 hover:underline"
             onClick={() => deleteDocument("products", id)}
           >
             Delete
-          </span>
+          </span> */}
+          <AskModal id={id} />
         </div>
       </td>
     </tr>

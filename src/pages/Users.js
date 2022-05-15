@@ -1,30 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import React from "react";
 
 import Layout from "../components/global/Layout";
 import Container from "../components/ui/Container";
 import UsersCard from "../components/users/UsersCard";
 import UsersTable from "../components/users/UsersTable";
-import { db } from "../config/firebase";
 import { useUserAuth } from "../context/AuthContext";
+import useUsers from "../utils/users";
 
 const UsersPage = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserAuth();
-
-  useEffect(() => {
-    setIsLoading((prev) => !prev);
-    const getUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-        setUsers((prev) => [...prev, { id: doc.id, ...doc.data() }]);
-        setIsLoading((prev) => !prev);
-      });
-    };
-
-    getUsers();
-  }, []);
+  const { users, isLoading } = useUsers();
 
   return (
     <>

@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
+  browserLocalPersistence,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  setPersistence,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -28,6 +30,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setIsLoading(false);
     });
     return () => {
       unsubscribe();
@@ -44,7 +47,7 @@ export function AuthProvider({ children }) {
 
   return (
     <UserAuthContext.Provider value={contextValue}>
-      {children}
+      {!isLoading && children}
     </UserAuthContext.Provider>
   );
 }
