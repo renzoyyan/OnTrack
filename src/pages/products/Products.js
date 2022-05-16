@@ -1,45 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Layout from "../../components/global/Layout";
 import ProductsCard from "../../components/products/ProductsCard";
 import ProductsTable from "../../components/products/ProductsTable";
 import Container from "../../components/ui/Container";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase";
+
+import useProducts from "../../utils/product";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsLoading(true);
-    const getProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      querySnapshot.forEach((doc) => {
-        setProducts((prev) => [...prev, { id: doc.id, ...doc.data() }]);
-        setIsLoading(false);
-      });
-    };
-
-    getProducts();
-  }, []);
-
-  const getCurrentProduct = async (id) => {
-    const productsRef = doc(db, "products", id);
-    try {
-      const docSnap = await getDoc(productsRef);
-
-      if (docSnap.exists()) {
-        const data = { id: docSnap.id, ...docSnap.data() };
-        navigate(`/products/edit/${id}`);
-        return data;
-      }
-      return null;
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  const { products, isLoading, getCurrentProduct } = useProducts();
 
   return (
     <Layout>
@@ -72,11 +41,11 @@ const ProductsPage = () => {
           ))}
         </ProductsTable>
         {isLoading && (
-          <p className="text-sm text-center mt-20 text-gray-400">Loading..</p>
+          <p className="mt-20 text-sm text-center text-gray-400">Loading..</p>
         )}
 
         {products.length <= 0 && !isLoading && (
-          <p className="text-gray-400 text-sm font-medium text-center mt-20">
+          <p className="mt-20 text-sm font-medium text-center text-gray-400">
             No products found
           </p>
         )}

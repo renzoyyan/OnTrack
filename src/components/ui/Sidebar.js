@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ViewGridIcon,
-  UserIcon,
-  CollectionIcon,
-  TagIcon,
-} from "@heroicons/react/solid";
+import { ViewGridIcon, UserIcon, CollectionIcon } from "@heroicons/react/solid";
 import ActiveLink from "./ActiveLink";
 import { Link } from "react-router-dom";
 
@@ -23,11 +18,6 @@ const menus = [
     title: "Products",
     path: "/products",
     icon: <CollectionIcon className="w-5 h-5 text-indigo-600" />,
-  },
-  {
-    title: "Brands",
-    path: "/brands",
-    icon: <TagIcon className="w-5 h-5 text-indigo-600" />,
   },
 ];
 

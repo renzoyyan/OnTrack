@@ -16,7 +16,7 @@ export const productSchema = yup.object().shape({
   price: yup
     .string()
     .required("Price is required")
-    .matches(/^\d*[\.{1}\d*]\d*$/, "Price must be a number"),
+    .matches(/^[0-9]+$/gi, "Price must be a number"),
   stocks: yup
     .number()
     .required("Stocks is required")

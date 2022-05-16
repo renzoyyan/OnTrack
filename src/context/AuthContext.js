@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
-  browserLocalPersistence,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  setPersistence,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";

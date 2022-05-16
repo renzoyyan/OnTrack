@@ -24,7 +24,7 @@ const NewProductPage = () => {
     <Layout>
       <Container>
         <div className="flex items-center justify-between pt-8">
-          <h2 className="text-3xl text-gray-700 font-bold">New Product</h2>
+          <h2 className="text-3xl font-bold text-gray-700">New Product</h2>
           <div className="flex items-center space-x-6 text-sm">
             <Link to="/products" className="text-amber-500 hover:underline">
               Back
@@ -61,7 +61,7 @@ const NewProductPage = () => {
         >
           {({ values, handleSubmit, errors, touched }) => (
             <Form id="product-form" onSubmit={handleSubmit}>
-              <div className="mt-8 bg-white p-6 shadow-sm rounded-md space-y-5">
+              <div className="p-6 mt-8 space-y-5 bg-white rounded-md shadow-sm">
                 <div className="grid grid-cols-3 gap-x-4">
                   <FormikController
                     control="input"
@@ -70,14 +70,12 @@ const NewProductPage = () => {
                     error={Boolean(errors.name && touched.name)}
                   />
                   <FormikController
-                    control="select"
+                    control="input"
                     name="brand"
                     label="Brand"
-                    value={values.brand}
-                    options={["Nike", "Addidas"]}
-                    placeholder="Nike"
                     error={Boolean(errors.brand && touched.brand)}
                   />
+
                   <FormikController
                     control="input"
                     type="date"
@@ -132,19 +130,19 @@ const NewProductPage = () => {
                                   type="button"
                                   onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
                                 >
-                                  <TrashIcon className="text-red-500 w-4 h-4" />
+                                  <TrashIcon className="w-4 h-4 text-red-500" />
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
                                 >
-                                  <PlusCircleIcon className="text-green-500 w-4 h-4" />
+                                  <PlusCircleIcon className="w-4 h-4 text-green-500" />
                                 </button>
                               </div>
                             ))
                           ) : (
                             <button
-                              className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-md"
+                              className="px-4 py-2 text-sm text-white bg-indigo-600 rounded-md"
                               type="button"
                               onClick={() => arrayHelpers.push("")}
                             >
@@ -156,7 +154,7 @@ const NewProductPage = () => {
                             <ErrorMessage
                               name="sizes"
                               component="div"
-                              className="error-msg pointer-events-none"
+                              className="pointer-events-none error-msg"
                             />
                           )}
                         </div>
@@ -186,19 +184,19 @@ const NewProductPage = () => {
                                   type="button"
                                   onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
                                 >
-                                  <TrashIcon className="text-red-500 w-4 h-4" />
+                                  <TrashIcon className="w-4 h-4 text-red-500" />
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() => arrayHelpers.insert(index, "")} // insert an empty string at a position
                                 >
-                                  <PlusCircleIcon className="text-green-500 w-4 h-4" />
+                                  <PlusCircleIcon className="w-4 h-4 text-green-500" />
                                 </button>
                               </div>
                             ))
                           ) : (
                             <button
-                              className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-md"
+                              className="px-4 py-2 text-sm text-white bg-indigo-600 rounded-md"
                               type="button"
                               onClick={() => arrayHelpers.push("")}
                             >
@@ -210,7 +208,7 @@ const NewProductPage = () => {
                             <ErrorMessage
                               name="colors"
                               component="div"
-                              className="error-msg pointer-events-none"
+                              className="pointer-events-none error-msg"
                             />
                           )}
                         </div>

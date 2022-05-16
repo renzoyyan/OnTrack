@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import ProtectedRoute from "./components/global/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
-import BrandsPage from "./pages/brands/Brands";
 import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
 import EditProductPage from "./pages/products/EditProduct";
@@ -74,15 +73,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <EditProductPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/brands"
-            element={
-              <ProtectedRoute>
-                <BrandsPage />
               </ProtectedRoute>
             }
           />

@@ -5,6 +5,7 @@ import { db } from "../config/firebase";
 const useUsers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const usersLength = users?.length;
 
   useEffect(() => {
     setIsLoading((prev) => !prev);
@@ -19,7 +20,7 @@ const useUsers = () => {
     getUsers();
   }, []);
 
-  return { users, isLoading };
+  return { users, isLoading, usersLength };
 };
 
 export default useUsers;
