@@ -7,7 +7,7 @@ import Navbar from "../components/ui/Navbar";
 import { useUserAuth } from "../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth, db } from "../config/firebase";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 const RegisterPage = () => {
   const { register } = useUserAuth();
@@ -36,7 +36,7 @@ const RegisterPage = () => {
 
               await setDoc(doc(db, "users", res.user.uid), {
                 ...values,
-                timeStamp: serverTimestamp(),
+                timeStamp: Timestamp.now().toDate().toLocaleDateString(),
               }).catch((err) => console.error(err.message));
 
               if (res) {

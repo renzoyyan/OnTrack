@@ -7,8 +7,8 @@ import useUsers from "../utils/users";
 import useProducts from "../utils/product";
 
 const DashboardPage = () => {
-  const { usersLength, isLoading } = useUsers();
-  const { productsLength, isLoading: prodLoading } = useProducts();
+  const { usersLength } = useUsers();
+  const { productsLength } = useProducts();
 
   return (
     <Layout>
@@ -17,12 +17,12 @@ const DashboardPage = () => {
           <SummaryInfo
             Icon={<UsersIcon className="w-6 h-6 text-gray-100" />}
             title={"Users"}
-            total={isLoading ? "..." : usersLength}
+            total={usersLength}
           />
           <SummaryInfo
             Icon={<CollectionIcon className="w-6 h-6 text-gray-100" />}
             title={"Products"}
-            total={prodLoading ? "..." : productsLength}
+            total={productsLength}
           />
         </div>
       </Container>

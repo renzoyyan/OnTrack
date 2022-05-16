@@ -15,7 +15,7 @@ const UsersPage = () => {
     <>
       <Layout>
         <Container>
-          <h1 className="text-3xl text-gray-700 mt-8 mb-20">Users</h1>
+          <h1 className="mt-8 mb-20 text-3xl text-gray-700">Users</h1>
 
           <UsersTable>
             {users?.map((userData) => (
@@ -30,11 +30,11 @@ const UsersPage = () => {
             ))}
           </UsersTable>
           {isLoading && (
-            <p className="text-sm text-center mt-20 text-gray-400">Loading..</p>
+            <p className="mt-20 text-sm text-center text-gray-400">Loading..</p>
           )}
 
           {users.length <= 0 && !isLoading && (
-            <p className="text-gray-400 text-sm font-medium text-center mt-20">
+            <p className="mt-20 text-sm font-medium text-center text-gray-400">
               No users found
             </p>
           )}
