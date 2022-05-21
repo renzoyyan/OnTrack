@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({ login }) => {
   return (
-    <header className="container py-4 mx-auto">
+    <header className="container py-4 mx-auto px-4">
       <nav className="flex items-center justify-between">
         <h1 className="text-2xl text-indigo-600">OnTrack.</h1>
         {login ? (
