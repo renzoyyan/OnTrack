@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon, SaveIcon, TrashIcon } from "@heroicons/react/solid";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 
@@ -48,23 +48,29 @@ const EditProductPage = () => {
   return (
     <Layout>
       <Container>
-        <div className="flex items-center justify-between pt-8">
-          <h2 className="text-3xl font-bold text-gray-700">New Product</h2>
-          <div className="flex items-center space-x-6 text-sm">
-            <Link to="/products" className="text-amber-500 hover:underline">
-              Back
-            </Link>
-            <button
-              disabled={isSubmitting}
-              type="submit"
-              form="product-form"
-              className={`px-10 py-2 text-sm font-medium text-white transition duration-150 bg-indigo-600 rounded-md focus:ring-offset-2 ring-2 ring-indigo-600 font-open-sans hover:bg-indigo-600/95 hover:ring-indigo-600/95 ${
-                isSubmitting && "bg-indigo-600/85 ring-indigo-600/85"
-              }`}
-            >
-              {isSubmitting ? "Saving..." : "Save"}
-            </button>
-          </div>
+        <div className="flex items-center justify-between">
+          <h2 className="text-3xl font-bold text-gray-700">
+            Product {product?.name}
+          </h2>
+          <Link
+            to="/products"
+            className="inline-block mt-1 ml-10 text-sm text-amber-500 hover:underline"
+          >
+            Cancel
+          </Link>
+        </div>
+        <div className="flex items-center justify-between pt-16 text-sm font-medium">
+          <p>Product Information</p>
+          <button
+            disabled={isSubmitting}
+            type="submit"
+            form="product-form"
+            className={`btn-submit ${isSubmitting && "disabled:opacity-75"}`}
+          >
+            <SaveIcon className="w-5 h-5" />
+
+            <span>{isSubmitting ? "Saving..." : "Save"}</span>
+          </button>
         </div>
         <Formik
           initialValues={{
@@ -99,7 +105,7 @@ const EditProductPage = () => {
           {({ values, handleSubmit, errors, touched }) => (
             <Form id="product-form" onSubmit={handleSubmit}>
               <div className="p-6 mt-8 space-y-5 bg-white rounded-md shadow-sm">
-                <div className="grid grid-cols-3 gap-x-4">
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   <FormikController
                     control="input"
                     name="name"
@@ -120,8 +126,6 @@ const EditProductPage = () => {
                     label="Release Date"
                     error={Boolean(errors.release_date && touched.release_date)}
                   />
-                </div>
-                <div className="grid grid-cols-3 gap-x-4">
                   <FormikController
                     control="select"
                     name="category"
@@ -143,7 +147,8 @@ const EditProductPage = () => {
                     error={Boolean(errors.stocks && touched.stocks)}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-x-4">
+
+                <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label htmlFor="sizes" className="label">
                       Sizes

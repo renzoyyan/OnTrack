@@ -13,11 +13,11 @@ const ProductsPage = () => {
   return (
     <Layout>
       <Container>
-        <div className="flex items-center justify-between mt-8 mb-20">
+        <div className="flex items-center justify-between mt-2 mb-10 md:mt-8 md:mb-20">
           <h1 className="text-3xl text-gray-700 ">Products</h1>
           <Link
             to="/products/new"
-            className="px-6 py-2 text-sm font-medium text-white transition duration-150 bg-indigo-700 rounded-md focus:ring-offset-2 ring-2 ring-indigo-700 font-open-sans hover:bg-indigo-700/95 hover:ring-indigo-700/95"
+            className="px-2 py-2 text-sm font-medium text-white transition duration-150 bg-indigo-700 rounded-md md:px-6 focus:ring-offset-2 ring-2 ring-indigo-700 font-open-sans hover:bg-indigo-700/95 hover:ring-indigo-700/95"
           >
             + Add Product
           </Link>

@@ -49,6 +49,34 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* <Route
+            path="products"
+            element={
+              <ProtectedRoute>
+                <ProductsPage />
+              </ProtectedRoute>
+            }
+          >
+            <Route
+              exact
+              path="/new"
+              element={
+                <ProtectedRoute>
+                  <NewProductPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditProductPage />
+                </ProtectedRoute>
+              }
+            />
+          </Route> */}
+
           <Route
             exact
             path="/products"

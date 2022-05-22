@@ -30,7 +30,7 @@ const ProductsCard = ({
       <td className="px-6 py-4 text-sm whitespace-nowrap">
         <div className="space-x-4">
           <span
-            className="text-sm cursor-pointer text-amber-500 hover:underline"
+            className="text-sm font-medium text-indigo-600 cursor-pointer hover:underline"
             onClick={() => editProduct(id)}
           >
             Edit

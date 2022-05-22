@@ -4,18 +4,19 @@ import Layout from "../components/global/Layout";
 import Container from "../components/ui/Container";
 import UsersCard from "../components/users/UsersCard";
 import UsersTable from "../components/users/UsersTable";
-import { useUserAuth } from "../context/AuthContext";
+import { formatDateWithTime } from "../utils/formatDate";
 import useUsers from "../utils/users";
 
 const UsersPage = () => {
-  const { user } = useUserAuth();
   const { users, isLoading } = useUsers();
 
   return (
     <>
       <Layout>
         <Container>
-          <h1 className="mt-8 mb-20 text-3xl text-gray-700">Users</h1>
+          <h1 className="mt-2 mb-10 text-3xl text-gray-700 md:mt-8 md:mb-20">
+            Users
+          </h1>
 
           <UsersTable>
             {users?.map((userData) => (
@@ -24,8 +25,7 @@ const UsersPage = () => {
                 first_name={userData.first_name}
                 last_name={userData.last_name}
                 email={userData.email}
-                createdAt={userData.timeStamp}
-                status={user?.email === userData.email ? "Online" : "Offline"}
+                lastLoginAt={formatDateWithTime(userData.lastLoginAt)}
               />
             ))}
           </UsersTable>

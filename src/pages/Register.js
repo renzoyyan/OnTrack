@@ -7,7 +7,7 @@ import Navbar from "../components/ui/Navbar";
 import { useUserAuth } from "../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth, db } from "../config/firebase";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const RegisterPage = () => {
   const { register } = useUserAuth();
@@ -16,7 +16,7 @@ const RegisterPage = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-[70vh]">
         <Formik
           initialValues={{
             first_name: "",
@@ -36,7 +36,8 @@ const RegisterPage = () => {
 
               await setDoc(doc(db, "users", res.user.uid), {
                 ...values,
-                timeStamp: Timestamp.now().toDate().toLocaleDateString(),
+                lastLoginAt: res.user.metadata.lastSignInTime,
+                timeStamp: serverTimestamp(),
               }).catch((err) => console.error(err.message));
 
               if (res) {
@@ -82,7 +83,7 @@ const RegisterPage = () => {
                     error={Boolean(errors.password && touched.password)}
                   />
                 </div>
-                <div className="mt-5">
+                <div className="mt-6">
                   <button
                     disabled={!(isValid && dirty) || isSubmitting}
                     type="submit"

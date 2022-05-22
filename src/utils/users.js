@@ -8,12 +8,12 @@ const useUsers = () => {
   const usersLength = users?.length;
 
   useEffect(() => {
-    setIsLoading((prev) => !prev);
+    setIsLoading(true);
     const getUsers = async () => {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         setUsers((prev) => [...prev, { id: doc.id, ...doc.data() }]);
-        setIsLoading((prev) => !prev);
+        setIsLoading(false);
       });
     };
 

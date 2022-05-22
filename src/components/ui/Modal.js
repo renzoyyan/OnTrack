@@ -26,7 +26,7 @@ export default function AskModal({ id }) {
       <button
         type="button"
         onClick={openModal}
-        className="text-sm text-red-500 hover:underline"
+        className="text-sm font-medium text-indigo-600 hover:underline"
       >
         Delete
       </button>
@@ -46,7 +46,7 @@ export default function AskModal({ id }) {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -56,7 +56,7 @@ export default function AskModal({ id }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -67,14 +67,14 @@ export default function AskModal({ id }) {
                   <div className="mt-4 space-x-4 text-right">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent  px-4 py-2 text-sm  text-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center px-4 py-2 text-sm text-gray-400 border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Cancel
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                       onClick={handleDeleteDocument}
                     >
                       Delete

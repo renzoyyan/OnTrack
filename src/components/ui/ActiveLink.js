@@ -6,8 +6,10 @@ const ActiveLink = ({ href, children }) => {
   return (
     <Link
       to={href}
-      className={`link ${
-        location.pathname === href && "border-l-4 border-primary bg-indigo-50"
+      className={`link border-transparent ${
+        location.pathname === href
+          ? "md:border-l-4 md:border-primary bg-indigo-50"
+          : "border-white"
       }`}
     >
       {children}

@@ -13,7 +13,10 @@ const DashboardPage = () => {
   return (
     <Layout>
       <Container>
-        <div className="grid grid-cols-3 gap-x-8">
+        <h1 className="mt-2 mb-10 text-3xl text-gray-700 md:hidden">
+          Dashboard
+        </h1>
+        <div className="grid gap-y-4 md:gap-y-0 md:grid-cols-2 md:gap-x-8">
           <SummaryInfo
             Icon={<UsersIcon className="w-6 h-6 text-gray-100" />}
             title={"Users"}

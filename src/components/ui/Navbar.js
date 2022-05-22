@@ -1,29 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = ({ login }) => {
+const Navbar = () => {
+  const location = useLocation();
+
   return (
-    <header className="container py-4 mx-auto px-4">
+    <header className="container px-4 py-4 mx-auto">
       <nav className="flex items-center justify-between">
-        <h1 className="text-2xl text-indigo-600">OnTrack.</h1>
-        {login ? (
-          <div className="space-x-4">
+        <Link to="/" className="logo">
+          OnTrack.
+        </Link>
+        {location.pathname === "/" && (
+          <div className="hidden space-x-4 sm:block">
             <span className="text-xs text-gray-400">No account yet?</span>
-            <Link
-              to="/signup"
-              className="inline-block px-4 py-2 text-sm transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-indigo-100 hover:border-indigo-100"
-            >
-              Create Account
+            <Link to="/signup" className="px-4 btn-signup">
+              Create an account
             </Link>
           </div>
-        ) : (
-          <div>
-            <Link
-              to="/"
-              className="inline-block px-4 py-2 text-sm transition duration-200 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-indigo-100 hover:border-indigo-100"
-            >
-              Already have account?
-            </Link>
-          </div>
+        )}
+        {location.pathname === "/signup" && (
+          <Link
+            to="/"
+            className="text-gray-500 md:text-gray-800 border-0 btn-signup md:px-4 md:border hover:bg-transparent md:hover:bg-indigo-100 md:hover:border-indigo-100;"
+          >
+            Already have account?
+          </Link>
         )}
       </nav>
     </header>

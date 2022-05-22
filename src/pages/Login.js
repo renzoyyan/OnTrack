@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Form, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormikController from "../components/global/FormikController";
 import { loginSchema } from "../validations/login";
 import { useUserAuth } from "../context/AuthContext";
 import Navbar from "../components/ui/Navbar";
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const LoginPage = () => {
   const [error, setError] = useState("");
@@ -13,7 +15,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Navbar login={true} />
+      <Navbar />
 
       <div className="flex items-center justify-center h-[80vh]">
         <Formik
@@ -25,7 +27,15 @@ const LoginPage = () => {
           onSubmit={async (values) => {
             const { email, password } = values;
             try {
-              await loginUser(email, password);
+              const res = await loginUser(email, password);
+
+              const userRef = doc(db, "users", res.user.uid);
+
+              await updateDoc(userRef, {
+                lastLoginAt: res.user.metadata.lastSignInTime,
+                last_updated: serverTimestamp(),
+              });
+
               navigate("/dashboard");
             } catch (error) {
               console.error(error.message);
@@ -66,6 +76,12 @@ const LoginPage = () => {
                 >
                   Login
                 </button>
+              </div>
+              <div className="mt-5 space-y-4 text-center sm:hidden">
+                <p className="text-xs text-gray-400">OR</p>
+                <Link to="/signup" className="w-full btn-signup">
+                  Create an account
+                </Link>
               </div>
             </Form>
           )}

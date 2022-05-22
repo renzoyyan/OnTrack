@@ -24,14 +24,7 @@ const UsersTable = ({ children }) => {
                   scope="col"
                   className="sticky z-10 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 bg-indigo-100 border-b border-indigo-100 -top-0"
                 >
-                  Created at
-                </th>
-
-                <th
-                  scope="col"
-                  className="sticky z-10 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 bg-indigo-100 border-b border-indigo-100 -top-0"
-                >
-                  Status
+                  Last login
                 </th>
               </tr>
             </thead>
