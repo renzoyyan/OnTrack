@@ -10,7 +10,7 @@ export const productSchema = yup.object().shape({
     .min(1, "Minimum of 1 shoe color"),
 
   sizes: yup
-    .array()
+    .array().of(yup.string().matches(/^[0-9]+$/gi, "Size must be a number"))
     .required("Must have Size(s)")
     .min(1, "Minimum of 1 shoe size"),
   price: yup
